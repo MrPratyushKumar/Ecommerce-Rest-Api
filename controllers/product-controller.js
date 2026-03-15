@@ -102,3 +102,41 @@ const createNewProduct = async (req , res)=>{
 }
 
 
+// FUNCTION 4: Update product
+
+const updateProduct = async (req , res)=>{
+  try {
+    const updateProductFromData = req.body;
+
+    const getCurrentProductId = req.params.id;
+    const updatedProduct = await Product.findByIdAndUpdate(getCurrentProductId , updateProductFromData , {
+      new : true
+      // This will get the updated Product data
+    }
+  )
+  if(!updatedProduct){
+    // Product is not found
+    res.status(404).json({
+      success : false ,
+      message : 'Product is not Found with this ID'
+    })
+  }
+  // Product is Found
+  res.status(200).json({
+    success : true,
+    message : 'Product Updated successfully',
+    data : updatedProduct
+  }) 
+
+    
+  } catch (error) {
+    // If something goes wrong
+    console.log(error)
+    res.status(500).json({
+      success: false,
+      message: "Something Went Wrong! Please try again sometime",
+      error: error.message,
+    });
+  }
+}
+
