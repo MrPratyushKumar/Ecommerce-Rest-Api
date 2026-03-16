@@ -79,3 +79,35 @@ const createNewCategory = async (req , res)=> {
   }
 }
 
+const updateCategory = async(req , res)=> {
+  try {
+    const updateCategoryFromData = req.body;
+    const getCurrentCategoryId = req.params.id;
+    const updatedCategory = await Category.findByIdAndUpdate(getAllCategories , updateCategoryFromData , {
+      new : true
+      // This will get the updated category data
+    }
+  )
+  if(!!updatedCategory){
+    // CAtegory is not Found 
+    res.status(404).json({
+      success : false,
+      message : 'Category is not Found with This ID'
+    })
+  }
+  // category is found 
+  res.status(200).json({
+    success : true,
+    message : 'Category updated Successfully',
+    data : updatedCategory
+  })
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something Went Wrong! Please try again sometime",
+    });
+  }
+}
+
