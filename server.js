@@ -25,8 +25,25 @@ connectToDB();
 // Import Routes 
 const productRoutes = require('./routes/product-routes.js')
 
+const categoryRoutes = require('./routes/category-routes.js');
+
+
 // use Product  Routes 
 app.use('/api/products' , productRoutes);
+
+// use category routes
+app.use('/api/categories' , categoryRoutes);
+
+// Home route
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to E-Commerce API!',
+    endpoints: {
+      products: '/api/products',
+      categories: '/api/categories'  // NEW
+    }
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`✅ Server is running on port ${PORT}`);
