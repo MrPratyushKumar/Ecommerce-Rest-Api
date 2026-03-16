@@ -137,3 +137,6 @@ const deleteCategory = async (req , res)=> {
     });
   }
 }
+
+// export all controller function
+module.exports = {getAllCategories , getSingleCategoryByID , updateCategory , deleteCategory , createNewCategory};
