@@ -111,3 +111,29 @@ const updateCategory = async(req , res)=> {
   }
 }
 
+
+const deleteCategory = async (req , res)=> {
+  try {
+    const getCurrentCategoryId = req. params.id;
+    const deletedCategory = await Category.findByIdAndDelete(getCurrentCategoryId);
+    if(!deletedCategory){
+      // Category is not found 
+      res.status(404).json({
+        success : false,
+        message : "Category is not found with this ID"
+      })
+    }
+    // Category is found
+    res.status(200).json({
+      success : true,
+      data : deletedCategory
+    })
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something Went Wrong! Please try again sometime",
+    });
+  }
+}
