@@ -1,16 +1,10 @@
-// Category Example:
-// ├── Name: "Electronics"
-// ├── Description: "All electronic items"
-// ├── Slug: "electronics" (for URL)
-// └── Image: "category-image.jpg"
-
 const mongoose = require("mongoose");
 
 const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Category name is required'],
-    unique: true,  // No duplicate category names
+    unique: true,
     trim: true,
     maxlength: [50, 'Category name cannot exceed 50 characters']
   },
@@ -18,8 +12,8 @@ const categorySchema = new mongoose.Schema({
   slug: {
     type: String,
     unique: true,
-    lowercase: true
-    // Auto-generated from name
+    lowercase: true,
+    sparse: true
   },
   
   description: {
@@ -41,16 +35,13 @@ const categorySchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Auto-generated slug before saving
+categorySchema.pre('save', async function() {
+  if (this.name) {
+    this.slug = this.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+});
 
-categorySchema.pre('save', function(next) {
- if(this.isModified('name')){
-  this.slug = this.name
-  .toLowerCase()
-  .replace(/[^a-z0-9]+/g, '-')
-  .replace(/^-+|-+$/g, '');
- } 
- next();
-})
-
-module.exports = mongoose.model('Category' , categorySchema);
+module.exports = mongoose.models.Category || mongoose.model('Category', categorySchema);
