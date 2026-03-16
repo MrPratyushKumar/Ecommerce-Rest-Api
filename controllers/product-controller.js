@@ -140,3 +140,42 @@ const updateProduct = async (req , res)=>{
   }
 }
 
+
+// FUNCTION 5: Delete product
+const deleteProduct = async(req , res)=> {
+  try {
+    const getCurrentProductId = req.params.id;
+    const deletedProduct = await Product.findByIdAndDelete(getCurrentProductId);
+    if(!deletedProduct){
+      // Product is not found 
+      res.status(404).json({
+        success : false,
+        message : 'Product is not Found with this ID'
+      })
+    }
+    // product is Found 
+    res.status(200).json({
+      success : true,
+      data : deletedProduct
+    })
+  } catch (error) {
+    // If something goes wrong
+    console.log(error)
+    res.status(500).json({
+      success: false,
+      message: "Something Went Wrong! Please try again sometime",
+      error: error.message,
+    });
+  }
+}
+
+// ==================================================
+// Export all functions so routes can use them
+// ==================================================
+module.exports = {
+  getAllProducts,
+  getSingleProductByID,
+  createNewProduct,
+  updateProduct,
+  deleteProduct
+};
