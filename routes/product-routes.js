@@ -20,26 +20,26 @@ const {
 
 // get All Products 
 // URL: GET /api/products
-router.get('/get' , getAllProducts);
+router.get('/' , getAllProducts);
 
 
 // Get single product
 // URL: GET /api/products/12345
-router.get('/get/:id' , getSingleProductByID);
+router.get('/:id' , getSingleProductByID);
 
 // Create new product
 // URL: POST /api/products
 
-router.post('/add' , createNewProduct);
+router.post('/' , createNewProduct);
 
 // Update product
 // URL: PUT /api/products/12345
-router.put('/update/:id' , updateProduct);
+router.put('/:id' , updateProduct);
 
 // Delete product
 // URL: DELETE /api/products/12345
 
-router.delete('/delete/:id' , deleteProduct);
+router.delete('/:id' , deleteProduct);
 
 // Export all the Routers 
 module.exports = router;

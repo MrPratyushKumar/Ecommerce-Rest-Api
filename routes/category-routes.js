@@ -7,19 +7,19 @@ const{getAllCategories , getSingleCategoryByID , updateCategory , deleteCategory
 //  Create all the routes that are related to Categories only 
 
 // get all the Categories
-router.get('/get', getAllCategories);
+router.get('/', getAllCategories);
 
 // get single Category from  by id -> dynamic route
-router.get('/get/:id' , getSingleCategoryByID);
+router.get('/:id' , getSingleCategoryByID);
 
 // create new category
-router.post('/add' , createNewCategory);
+router.post('/' , createNewCategory);
 
 // Update the Category based on Id 
-router.put('/update/:id' , updateCategory);
+router.put('/:id' , updateCategory);
 
 // delete the category based on Id
-router.delete('/delete/:id' , deleteCategory);
+router.delete('/:id' , deleteCategory);
 
 // Export all the Categories 
 module.exports = router;
