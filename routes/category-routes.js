@@ -10,7 +10,7 @@ const{getAllCategories , getSingleCategoryByID , updateCategory , deleteCategory
 router.get('/get', getAllCategories);
 
 // get single Category from  by id -> dynamic route
-router.get('get/:id' , getSingleCategoryByID);
+router.get('/get/:id' , getSingleCategoryByID);
 
 // create new category
 router.post('/add' , createNewCategory);

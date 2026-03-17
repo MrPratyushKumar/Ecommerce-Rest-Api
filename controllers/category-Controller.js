@@ -102,11 +102,10 @@ const updateCategory = async (req, res) => {
     const getCurrentCategoryId = req.params.id;
     
     const updatedCategory = await Category.findByIdAndUpdate(
-      getCurrentCategoryId,  // ✅ Fixed variable
+      getCurrentCategoryId,  
       updateCategoryFromData,
       {
-        new: true,           // Return updated document
-        runValidators: true  // ✅ Added validators
+        new: true         
       }
     );
     
